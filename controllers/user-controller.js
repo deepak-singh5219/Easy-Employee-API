@@ -155,10 +155,8 @@ class UserController {
             present: true, 
         };
 
-        const isAttendanceMarked = await attendanceService.findAttendance(newAttendance);
-        if(isAttendanceMarked) return next(ErrorHandler.notAllowed('Attendance Already Marked'));
-
-        // console.log(newAttendance);
+       const isAttendanceMarked = await attendanceService.findAttendance(newAttendance);
+       if(isAttendanceMarked) return next(ErrorHandler.notAllowed('Attendance Already Marked'));
 
        const resp = await attendanceService.markAttendance(newAttendance);
        console.log(resp);
@@ -169,6 +167,20 @@ class UserController {
         } catch (error) {
             res.json({success:false,error});    
         } 
+    }
+
+    viewEmployeeAttendance = async (req,res,next) => {
+        try {
+            const data = req.body;
+            const resp = await attendanceService.findAllAttendance(data);
+            if(!resp) return next(ErrorHandler.notFound('No Attendance found'));
+            console.log(resp);
+
+            res.json({success:true,data:resp});
+            
+        } catch (error) {
+            res.json({success:false,error});
+        }
     }
 
 
