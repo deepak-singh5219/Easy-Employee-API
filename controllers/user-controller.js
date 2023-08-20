@@ -4,6 +4,8 @@ const UserDto = require('../dtos/user-dto');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const teamService = require('../services/team-service');
+const attendanceService = require('../services/attendance-service');
+
 
 class UserController {
 
@@ -80,6 +82,7 @@ class UserController {
             }
         }
         const userResp = await userService.updateUser(id,user);
+        console.log(userResp);
         if(!userResp) return next(ErrorHandler.serverError('Failed To Update Account'));
         res.json({success:true,message:'Account Updated'});
     }
@@ -134,6 +137,38 @@ class UserController {
         const leaders = await userService.findFreeLeaders();
         const data = leaders.map((o)=>new UserDto(o));
         res.json({success:true,message:'Free Leaders Found',data})
+    }
+
+    markEmployeeAttendance = async (req,res,next) => {
+        try {
+        const {email} = req.body;
+        const employee = await userService.findUser({email});
+        console.log(employee);
+        if(!employee) return next(ErrorHandler.notFound('No Employee Found'));
+
+        const {_id} = employee;
+        const newAttendance = {
+            employeeID:_id,
+            year:new Date().getFullYear(),
+            month:new Date().getMonth() + 1,
+            date:new Date().getDate(),
+            present: true, 
+        };
+
+        const isAttendanceMarked = await attendanceService.findAttendance(newAttendance);
+        if(isAttendanceMarked) return next(ErrorHandler.notAllowed('Attendance Already Marked'));
+
+        // console.log(newAttendance);
+
+       const resp = await attendanceService.markAttendance(newAttendance);
+       console.log(resp);
+       if(!resp) return next(ErrorHandler.serverError('Failed to mark attendance'));
+
+       res.json({success:true,newAttendance,message:'Attendance Marked'});
+            
+        } catch (error) {
+            res.json({success:false,error});    
+        } 
     }
 
 
