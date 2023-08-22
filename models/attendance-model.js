@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var AttendanceSchema = new Schema({
+const AttendanceSchema = new Schema({
 
     employeeID: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     year: {type: Number, required: true},

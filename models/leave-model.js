@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var LeaveSchema = new Schema({
+const LeaveSchema = new Schema({
 
     applicantID: {type: Schema.Types.ObjectId, ref: 'User', required: true},
     title: {type: String, required: true},
