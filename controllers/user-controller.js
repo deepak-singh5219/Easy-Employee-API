@@ -141,14 +141,11 @@ class UserController {
 
     markEmployeeAttendance = async (req,res,next) => {
         try {
-        const {email} = req.body;
-        const employee = await userService.findUser({email});
-        console.log(employee);
-        if(!employee) return next(ErrorHandler.notFound('No Employee Found'));
+        const {employeeID} = req.body;
 
-        const {_id} = employee;
+        // const {_id} = employee;
         const newAttendance = {
-            employeeID:_id,
+            employeeID,
             year:new Date().getFullYear(),
             month:new Date().getMonth() + 1,
             date:new Date().getDate(),
@@ -174,7 +171,6 @@ class UserController {
             const data = req.body;
             const resp = await attendanceService.findAllAttendance(data);
             if(!resp) return next(ErrorHandler.notFound('No Attendance found'));
-            console.log(resp);
 
             res.json({success:true,data:resp});
             
@@ -182,6 +178,36 @@ class UserController {
             res.json({success:false,error});
         }
     }
+
+    applyLeaveApplication = async (req, res, next) => {
+        try {
+            const data = req.body;
+            const { applicantID, title, type, startDate, endDate, appliedDate, period, reason } = data;
+            const newLeaveApplication = {
+                applicantID,
+                title,
+                type,
+                startDate,
+                endDate,
+                appliedDate, 
+                period, 
+                reason, 
+                adminResponse:false
+            };
+
+            const isLeaveApplied = await userService.findLeaveApplication({applicantID,startDate,endDate,appliedDate});
+            if(isLeaveApplied) return next(ErrorHandler.notAllowed('Leave Already Applied'));
+
+            const resp = await userService.createLeaveApplication(newLeaveApplication);
+            if(!resp) return next(ErrorHandler.serverError('Failed to apply leave'));
+
+            res.json({success:true,data:resp});
+
+        } catch (error) {
+            res.json({success:false,error});   
+        }
+    }
+
 
 
 }
