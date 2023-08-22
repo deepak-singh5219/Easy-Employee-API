@@ -192,7 +192,7 @@ class UserController {
                 appliedDate, 
                 period, 
                 reason, 
-                adminResponse:false
+                adminResponse:"pending"
             };
 
             const isLeaveApplied = await userService.findLeaveApplication({applicantID,startDate,endDate,appliedDate});
