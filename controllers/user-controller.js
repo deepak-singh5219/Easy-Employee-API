@@ -208,6 +208,19 @@ class UserController {
         }
     }
 
+    viewLeaveApplications = async (req, res, next) => {
+        try {
+            const data = req.body;
+            const resp = await userService.findAllLeaveApplications(data);
+            if(!resp) return next(ErrorHandler.notFound('No Leave Applications found'));
+
+            res.json({success:true,data:resp});
+
+        } catch (error) {
+            res.json({success:false,error});
+        }
+    }
+
 
 
 }

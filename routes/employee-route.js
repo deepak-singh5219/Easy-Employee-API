@@ -7,5 +7,6 @@ router.patch('/user',upload.single('profile'),asyncMiddleware(userController.upd
 router.post('/mark-employee-attendance',asyncMiddleware(userController.markEmployeeAttendance));
 router.post('/view-employee-attendance',asyncMiddleware(userController.viewEmployeeAttendance));
 router.post('/apply-leave-application',asyncMiddleware(userController.applyLeaveApplication));
+router.post('/view-leave-applications',asyncMiddleware(userController.viewLeaveApplications));
 
 module.exports = router;

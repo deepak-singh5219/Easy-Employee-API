@@ -51,6 +51,8 @@ class UserService {
 
     findLeaveApplication = async (data) => LeaveModel.findOne(data);
 
+    findAllLeaveApplications = async (data) => LeaveModel.find(data);
+
 }
 
 
