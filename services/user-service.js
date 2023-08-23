@@ -1,5 +1,6 @@
 const UserModel = require('../models/user-model');
 const LeaveModel = require('../models/leave-model');
+const UserSalaryModel = require('../models/user-salary');
 const bcrypt = require('bcrypt');
 
 class UserService {
@@ -52,6 +53,12 @@ class UserService {
     findLeaveApplication = async (data) => LeaveModel.findOne(data);
 
     findAllLeaveApplications = async (data) => LeaveModel.find(data);
+
+    assignSalary = async (data) => UserSalaryModel.create(data);
+
+    findSalary = async (data) => UserSalaryModel.findOne(data);
+
+    findAllSalary = async () => UserSalaryModel.find();
 
 }
 

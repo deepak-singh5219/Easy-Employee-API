@@ -81,6 +81,7 @@ class UserController {
                 name,username,mobile,address,image:filename
             }
         }
+        console.log(user);
         const userResp = await userService.updateUser(id,user);
         console.log(userResp);
         if(!userResp) return next(ErrorHandler.serverError('Failed To Update Account'));
@@ -216,6 +217,19 @@ class UserController {
 
             res.json({success:true,data:resp});
 
+        } catch (error) {
+            res.json({success:false,error});
+        }
+    }
+
+    assignEmployeeSalary = async (req, res, next) => {
+        try {
+            const data = req.body;
+            const isSalaryAssigned = await userService.findSalary(data);
+            if(isSalaryAssigned) return next(ErrorHandler.notAllowed('Salary Already Assigned'));
+            const resp = await userService.assignSalary(data);
+            if(!resp) return next(ErrorHandler.serverError('Failed to assign salary'));
+            res.json({success:true,data:resp}); 
         } catch (error) {
             res.json({success:false,error});
         }
