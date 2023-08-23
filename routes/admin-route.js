@@ -26,6 +26,7 @@ router.patch('/team/leader/add',asyncMiddleware(teamController.addRemoveLeader))
 router.patch('/team/leader/remove',asyncMiddleware(teamController.addRemoveLeader));                // Remove Team Leader
 router.get('/counts',asyncMiddleware(teamController.getCounts));                                    // Counts
 router.post('/view-employee-attendance',asyncMiddleware(userController.viewEmployeeAttendance));
+router.post('/view-leave-applications',asyncMiddleware(userController.viewLeaveApplications));
 
 
 module.exports = router;
