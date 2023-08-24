@@ -100,7 +100,7 @@ class AuthController {
             return res.status(401).json({success:false,message:'Unauthorized Access'})
         }
         const user = await userService.findUser({email});
-        if(user.status!='active') return next(ErrorHandler.unAuthorized('There is a problem with your account, Please contact to the admin'));
+        if(user?.status!='active') return next(ErrorHandler.unAuthorized('There is a problem with your account, Please contact to the admin'));
         const payload = {
             _id,
             email,
