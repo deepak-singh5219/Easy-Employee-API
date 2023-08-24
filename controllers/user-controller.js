@@ -235,6 +235,31 @@ class UserController {
         }
     }
 
+    updateEmployeeSalary = async (req,res,next) => {
+        try {
+            const {id} = req.params;
+            const body = req.body;
+            const isSalaryUpdated = await userService.updateSalary(id,body);
+            console.log(isSalaryUpdated);
+            if(!isSalaryUpdated) return next(ErrorHandler.serverError('Failed to update salary'));
+            res.json({success:true,message:'Salary Updated'});
+            
+        } catch (error) {
+            res.json({success:false,error});
+        }
+    }
+
+    viewAllSalary = async (req,res,next) => {
+        try {
+            const resp = await userService.findAllSalary();
+            if(!resp) return next(ErrorHandler.notFound('No Salary Found'));
+            res.json({success:true,data:resp});
+
+        } catch (error) {
+            res.json({success:false,error});
+        }
+    }
+
 
 
 }
