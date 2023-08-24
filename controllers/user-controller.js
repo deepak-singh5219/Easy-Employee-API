@@ -249,9 +249,11 @@ class UserController {
         }
     }
 
-    viewAllSalary = async (req,res,next) => {
+    viewSalary = async (req,res,next) => {
         try {
-            const resp = await userService.findAllSalary();
+            const {data} = req.body;
+            console.log(data);
+            const resp = await userService.findAllSalary(data);
             if(!resp) return next(ErrorHandler.notFound('No Salary Found'));
             res.json({success:true,data:resp});
 

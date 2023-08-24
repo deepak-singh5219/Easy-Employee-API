@@ -58,7 +58,7 @@ class UserService {
 
     findSalary = async (data) => UserSalaryModel.findOne(data);
 
-    findAllSalary = async () => UserSalaryModel.find();
+    findAllSalary = async (data) => UserSalaryModel.find(data);
 
     updateSalary = async (id, updatedSalary) => UserSalaryModel.findByIdAndUpdate(id, updatedSalary);
 

@@ -8,5 +8,6 @@ router.post('/mark-employee-attendance',asyncMiddleware(userController.markEmplo
 router.post('/view-employee-attendance',asyncMiddleware(userController.viewEmployeeAttendance));
 router.post('/apply-leave-application',asyncMiddleware(userController.applyLeaveApplication));
 router.post('/view-leave-applications',asyncMiddleware(userController.viewLeaveApplications));
+router.post('/view-salary',asyncMiddleware(userController.viewSalary));
 
 module.exports = router;
