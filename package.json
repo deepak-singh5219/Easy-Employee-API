@@ -4,7 +4,7 @@
   "description": "A system for company to manage their teams, employee and targets",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server",
+    "dev": "npx nodemon server.js",
     "start": "npm server"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "mongoose": "^6.0.12",
     "multer": "^1.4.3",
     "nodemailer": "^6.7.0",
+    "nodemon": "^3.0.1",
     "validator": "^13.7.0"
   }
 }
