@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const PORT = process.env.PORT || 5500;
 const cors = require('cors');
@@ -12,7 +13,6 @@ const errorMiddleware = require('./middlewares/error-middleware');
 const ErrorHandler = require('./utils/error-handler');
 const {auth, authRole} = require('./middlewares/auth-middleware');
 const app = express();
-require('dotenv').config();
 //Cors Option
 const corsOption = {
     credentials:true,

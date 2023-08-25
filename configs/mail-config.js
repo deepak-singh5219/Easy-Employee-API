@@ -1,10 +1,10 @@
 const nodeMailer = require('nodemailer');
-const smtpHost = process.env.SMTP_HOST || 'smtp.gmail.com';
-const smtpPort = process.env.SMTP_PORT || 587; 
-const smtpSecure = process.env.SMTP_SECURE || false;
-const smtpRequireTLS = process.env.SMTP_REQUIRE_TLS || true;
-const smtpAuthUser = process.env.SMTP_AUTH_USER || 'socialcodia@gmail.com';
-const smtpAuthPass = process.env.SMTP_AUTH_PASS || 'socialcodia';
+const smtpHost = process.env.SMTP_HOST;
+const smtpPort = process.env.SMTP_PORT; 
+const smtpSecure = process.env.SMTP_SECURE;
+const smtpRequireTLS = process.env.SMTP_REQUIRE_TLS;
+const smtpAuthUser = process.env.SMTP_AUTH_USER;
+const smtpAuthPass = process.env.SMTP_AUTH_PASS;
 
 transpoter = nodeMailer.createTransport({
     host:smtpHost,
