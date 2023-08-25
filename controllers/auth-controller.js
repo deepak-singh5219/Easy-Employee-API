@@ -53,7 +53,7 @@ class AuthController {
         if(!user) return next(ErrorHandler.notFound('Invalid Email Address'));
         const {_id:userId,name,email} = user;
         const otp = otpService.generateOtp();
-        const type = process.env.TYPE_FORGOT_PASSWORD || 2;
+        const type = process.env.TYPE_FORGOT_PASSWORD;
         await otpService.removeOtp(userId);
         await otpService.storeOtp(userId,otp,type);
         await mailService.sendForgotPasswordMail(name,email,otp);
