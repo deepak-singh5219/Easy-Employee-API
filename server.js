@@ -13,15 +13,16 @@ const errorMiddleware = require('./middlewares/error-middleware');
 const ErrorHandler = require('./utils/error-handler');
 const {auth, authRole} = require('./middlewares/auth-middleware');
 const app = express();
-//Cors Option
-const corsOption = {
-    credentials:true,
-    origin:['http://localhost:3000','http://localhost:4000','http://1.1.1.111:3000']
-}
-
 
 // Database Connection
 dbConnection();
+
+
+//Cors Option
+const corsOption = {
+    credentials:true,
+    origin:['http://localhost:3000','http://1.1.1.111:3000','https://urban-pancake-rqpj7x4xpvfxx79-3000.app.github.dev']
+}
 
 //Configuration
 app.use(cors(corsOption));
@@ -50,4 +51,4 @@ app.use(errorMiddleware)
 
 
 
-app.listen(PORT,()=>console.log(`Listining On Port : ${PORT}`));
+app.listen(PORT,()=>console.log(`Listening On Port : ${PORT}`));
