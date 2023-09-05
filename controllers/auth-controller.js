@@ -69,7 +69,7 @@ class AuthController {
         const {_id:userId} = user;
         const type = process.env.TYPE_FORGOT_PASSWORD || 2;
         const response = await otpService.verifyOtp(userId,otp,type);
-        console.log(response);
+        console.log("Response",response);
         if(response==='INVALID') return next(ErrorHandler.badRequest('Invalid OTP'));
         if(response==='EXPIRED') return next(ErrorHandler.badRequest('Otp has been Expired'));
         const {modifiedCount} = await userService.updatePassword(userId,password);
