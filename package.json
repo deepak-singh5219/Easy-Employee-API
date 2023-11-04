@@ -5,13 +5,13 @@
   "main": "server.js",
   "scripts": {
     "dev": "npx nodemon server.js",
-    "start": "npm server"
+    "start": "npm server.js"
   },
   "keywords": [],
   "author": "Social Codia",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",

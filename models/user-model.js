@@ -68,7 +68,8 @@ const userSchema = new Schema({
     timestamps:true
 });
 
-const SALT_FACTOR = process.env.BCRYPT_PASSWORD_SALT_FACTOR || 10;
+// const SALT_FACTOR = process.env.BCRYPT_PASSWORD_SALT_FACTOR || 10;
+const SALT_FACTOR = 10
 
 
 // userSchema.path('password').validate(
@@ -82,9 +83,10 @@ userSchema.pre('save',function(done){
         return done();
 
     bcrypt.genSalt(SALT_FACTOR,(err,salt)=>{
-        if(err)
+        if(err){
+            console.log(err);
             return done(err);
-    
+        }
         bcrypt.hash(user.password,salt,(err,hashedPassword)=>
         {
             if(err)
@@ -94,6 +96,7 @@ userSchema.pre('save',function(done){
         });
     });
 });
+
 
 userSchema.pre('updateOne',function(done){
     const user = this.getUpdate();

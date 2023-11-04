@@ -14,7 +14,6 @@ class UserController {
         const file = req.file;
         let {name,email,password,type, address, mobile} = req.body;
         const username = 'user'+crypto.randomInt(11111111,999999999);
-        console.log(req.file)
         if(!name || !email || !username || !password || !type || !address || !file || !mobile) return next(ErrorHandler.badRequest('All Fields Required'));
         type = type.toLowerCase();
         if(type==='admin')
@@ -30,7 +29,15 @@ class UserController {
         const user = {
             name,email,username,mobile,password,type,address,image:file.filename
         }
+
+        
+        // console.log("Hello! I am here in create user");
+        // console.log(user)
+        
         const userResp = await userService.createUser(user);
+       
+        
+
         if(!userResp) return next(ErrorHandler.serverError('Failed To Create An Account'));
         res.json({success:true,message:'User has been Added',user:new UserDto(user)});
     }
@@ -81,9 +88,9 @@ class UserController {
                 name,username,mobile,address,image:filename
             }
         }
-        console.log(user);
+        // console.log(user);
         const userResp = await userService.updateUser(id,user);
-        console.log(userResp);
+        // console.log(userResp);
         if(!userResp) return next(ErrorHandler.serverError('Failed To Update Account'));
         res.json({success:true,message:'Account Updated'});
     }
