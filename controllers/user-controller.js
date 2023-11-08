@@ -150,6 +150,8 @@ class UserController {
     markEmployeeAttendance = async (req,res,next) => {
         try {
         const {employeeID} = req.body;
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const d = new Date();
 
         // const {_id} = employee;
         const newAttendance = {
@@ -161,13 +163,15 @@ class UserController {
         };
 
        const isAttendanceMarked = await attendanceService.findAttendance(newAttendance);
-       if(isAttendanceMarked) return next(ErrorHandler.notAllowed('Attendance Already Marked'));
+       if(isAttendanceMarked) return next(ErrorHandler.notAllowed(d.toLocaleDateString() +" "+ days[d.getDay()-1]+" "+"Attendance Already Marked!"));
 
        const resp = await attendanceService.markAttendance(newAttendance);
        console.log(resp);
        if(!resp) return next(ErrorHandler.serverError('Failed to mark attendance'));
 
-       res.json({success:true,newAttendance,message:'Attendance Marked'});
+       const msg = d.toLocaleDateString() +" "+ days[d.getDay()-1]+" "+ "Attendance Marked!";
+       
+       res.json({success:true,newAttendance,message:msg});
             
         } catch (error) {
             res.json({success:false,error});    
