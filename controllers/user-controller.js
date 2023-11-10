@@ -156,9 +156,10 @@ class UserController {
         // const {_id} = employee;
         const newAttendance = {
             employeeID,
-            year:new Date().getFullYear(),
-            month:new Date().getMonth() + 1,
-            date:new Date().getDate(),
+            year:d.getFullYear(),
+            month:d.getMonth() + 1,
+            date:d.getDate(),
+            day:days[d.getDay()-1],
             present: true, 
         };
 
