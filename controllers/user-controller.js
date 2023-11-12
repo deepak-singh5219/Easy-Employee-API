@@ -150,16 +150,17 @@ class UserController {
     markEmployeeAttendance = async (req,res,next) => {
         try {
         const {employeeID} = req.body;
-        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const d = new Date();
 
         // const {_id} = employee;
+        
         const newAttendance = {
             employeeID,
             year:d.getFullYear(),
             month:d.getMonth() + 1,
             date:d.getDate(),
-            day:days[d.getDay()-1],
+            day:days[d.getDay()],
             present: true, 
         };
 
@@ -170,7 +171,7 @@ class UserController {
        console.log(resp);
        if(!resp) return next(ErrorHandler.serverError('Failed to mark attendance'));
 
-       const msg = d.toLocaleDateString() +" "+ days[d.getDay()-1]+" "+ "Attendance Marked!";
+       const msg = d.toLocaleDateString() +" "+ days[d.getDay()]+" "+ "Attendance Marked!";
        
        res.json({success:true,newAttendance,message:msg});
             
