@@ -206,7 +206,7 @@ class UserController {
                 appliedDate, 
                 period, 
                 reason, 
-                adminResponse:"pending"
+                adminResponse:"Pending"
             };
 
             const isLeaveApplied = await userService.findLeaveApplication({applicantID,startDate,endDate,appliedDate});
@@ -238,7 +238,10 @@ class UserController {
     assignEmployeeSalary = async (req, res, next) => {
         try {
             const data = req.body;
-            const isSalaryAssigned = await userService.findSalary(data);
+            const obj = {
+                "employeeID":data.employeeID
+            }
+            const isSalaryAssigned = await userService.findSalary(obj);
             if(isSalaryAssigned) return next(ErrorHandler.notAllowed('Salary Already Assigned'));
             const resp = await userService.assignSalary(data);
             if(!resp) return next(ErrorHandler.serverError('Failed to assign salary'));
