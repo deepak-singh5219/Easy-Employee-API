@@ -243,6 +243,8 @@ class UserController {
             }
             const isSalaryAssigned = await userService.findSalary(obj);
             if(isSalaryAssigned) return next(ErrorHandler.notAllowed('Salary Already Assigned'));
+            const d = new Date();
+            data["assignedDate"] = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
             const resp = await userService.assignSalary(data);
             if(!resp) return next(ErrorHandler.serverError('Failed to assign salary'));
             res.json({success:true,data:resp}); 

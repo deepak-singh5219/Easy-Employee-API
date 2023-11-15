@@ -6,6 +6,7 @@ const UserSalarySchema = new Schema({
     salary: {type: Number, default: 0},
     bonus: {type: Number, default: 0},
     reasonForBonus: {type: String, default: 'N/A'},
+    assignedDate: {type: String, required: true}
 });
 
 
