@@ -269,7 +269,7 @@ class UserController {
 
     viewSalary = async (req,res,next) => {
         try {
-            const {data} = req.body;
+            const data = req.body;
             console.log(data);
             const resp = await userService.findAllSalary(data);
             if(!resp) return next(ErrorHandler.notFound('No Salary Found'));
@@ -279,9 +279,6 @@ class UserController {
             res.json({success:false,error});
         }
     }
-
-
-
 }
 
 module.exports = new UserController();
