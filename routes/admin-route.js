@@ -30,6 +30,7 @@ router.post('/view-leave-applications',asyncMiddleware(userController.viewLeaveA
 router.post('/assign-employee-salary',asyncMiddleware(userController.assignEmployeeSalary));
 router.post('/update-employee-salary/:id',asyncMiddleware(userController.updateEmployeeSalary));
 router.post('/view-salary',asyncMiddleware(userController.viewSalary));
+router.post('/update-leave/:id',asyncMiddleware(userController.updateLeaveApplication));
 
 
 module.exports = router;

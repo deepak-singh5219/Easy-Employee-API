@@ -62,6 +62,8 @@ class UserService {
 
     updateSalary = async (id, updatedSalary) => UserSalaryModel.findByIdAndUpdate(id, updatedSalary);
 
+    updateLeaveApplication = async (id, updatedLeave) => LeaveModel.findByIdAndUpdate(id, updatedLeave);
+
 }
 
 

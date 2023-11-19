@@ -235,6 +235,21 @@ class UserController {
         }
     }
 
+    updateLeaveApplication = async (req, res, next) => {
+        try {
+
+            const {id} = req.params;
+            const body = req.body;
+            const isLeaveUpdated = await userService.updateLeaveApplication(id,body);
+            if(!isLeaveUpdated) return next(ErrorHandler.serverError('Failed to update leave'));
+            res.json({success:true,message:'Leave Updated'});
+            
+            
+        } catch (error) {
+            res.json({success:false,error});
+        }
+    }
+
     assignEmployeeSalary = async (req, res, next) => {
         try {
             const data = req.body;
