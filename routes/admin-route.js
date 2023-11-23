@@ -29,7 +29,7 @@ router.post('/view-employee-attendance',asyncMiddleware(userController.viewEmplo
 router.post('/view-leave-applications',asyncMiddleware(userController.viewLeaveApplications));
 router.post('/assign-employee-salary',asyncMiddleware(userController.assignEmployeeSalary));
 router.post('/update-employee-salary/',asyncMiddleware(userController.updateEmployeeSalary));
-router.post('/view-salary',asyncMiddleware(userController.viewSalary));
+router.post('/view-all-salary',asyncMiddleware(userController.viewSalary));
 router.post('/update-leave/:id',asyncMiddleware(userController.updateLeaveApplication));
 
 
