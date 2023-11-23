@@ -257,7 +257,8 @@ class UserController {
                 "employeeID":data.employeeID
             }
             const isSalaryAssigned = await userService.findSalary(obj);
-            if(isSalaryAssigned) return next(ErrorHandler.notAllowed('Salary Already Assigned'));
+            if(isSalaryAssigned) return next(ErrorHandler.serverError('Salary already assigned'));
+
             const d = new Date();
             data["assignedDate"] = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
             const resp = await userService.assignSalary(data);
@@ -270,9 +271,11 @@ class UserController {
 
     updateEmployeeSalary = async (req,res,next) => {
         try {
-            const {id} = req.params;
             const body = req.body;
-            const isSalaryUpdated = await userService.updateSalary(id,body);
+            const {employeeID} = body;
+            const d = new Date();
+            body["assignedDate"] = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+            const isSalaryUpdated = await userService.updateSalary({employeeID},body);
             console.log(isSalaryUpdated);
             if(!isSalaryUpdated) return next(ErrorHandler.serverError('Failed to update salary'));
             res.json({success:true,message:'Salary Updated'});
