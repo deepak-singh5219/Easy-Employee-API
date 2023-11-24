@@ -7,7 +7,8 @@ const upload = require('../services/file-upload-service');
 
 router.patch('/user',upload.single('profile'),asyncMiddleware(userController.updateUser));      // Update Self Profile
 router.get('/team',asyncMiddleware(leaderController.getTeam));                                  // Team
-router.get('/team/members',asyncMiddleware(leaderController.getTeamMembers));                   // Team Members
+router.get('/team/members',asyncMiddleware(leaderController.getTeamMembers)); 
+                  // Team Members
 
 
 module.exports = router;

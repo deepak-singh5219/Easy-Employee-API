@@ -59,7 +59,7 @@ const authRole = (role) =>
 {
     return (req,res,next)=>
     {
-        if(req.user.type!=role)
+        if(!role.includes(req.user.type))
             return next(ErrorHandler.notAllowed());
         next();
     }
