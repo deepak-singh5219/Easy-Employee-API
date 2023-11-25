@@ -43,6 +43,7 @@ class AuthController {
             // httpOnly:true
         })
 
+        console.log(res);
         res.json({success:true,message:'Login Successfull',user:new UserDto(user)})
     }
 
