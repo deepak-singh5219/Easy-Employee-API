@@ -36,11 +36,11 @@ class AuthController {
         await tokenService.storeRefreshToken(_id,refreshToken);
         res.cookie('accessToken',accessToken,{
             maxAge:1000*60*60*24*30,
-            // httpOnly:true
+            httpOnly:true
         });
         res.cookie('refreshToken',refreshToken,{
             maxAge:1000*60*60*24*30,
-            // httpOnly:true
+            httpOnly:true
         })
 
         console.log(res);
